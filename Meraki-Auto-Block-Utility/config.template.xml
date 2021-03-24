@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <Remote>FALSE</Remote>
+  <RemoteComputer></RemoteComputer>
+  <RemoteUserName></RemoteUserName>
+  <RemotePassword></RemotePassword>
+  <MerakiAPIKey></MerakiAPIKey>
+  <Organization></Organization>
+  <NetworkId></NetworkId>
+</Settings>
