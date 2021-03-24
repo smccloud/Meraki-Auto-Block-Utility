@@ -13,16 +13,20 @@ namespace Meraki_Auto_Block_Utility
         public string RemoteUserName { get; set; }
         public string RemotePassword { get; set; }
         public string MerakiAPIKey { get; set; }
+        public string Organization { get; set; }
+        public string NetworkId { get; set; }
 
         public Settings() { }
 
-        public Settings(bool remote, string remoteComputer, string remoteUserName, string remotePassword, string merakiAPIKey)
+        public Settings(bool remote, string remoteComputer, string remoteUserName, string remotePassword, string merakiAPIKey, string organization, string networkId)
         {
             this.Remote = remote;
             this.RemoteComputer = remoteComputer;
             this.RemoteUserName = remoteUserName;
             this.RemotePassword = remotePassword;
             this.MerakiAPIKey = merakiAPIKey;
+            this.Organization = organization;
+            this.NetworkId = networkId;
         }
     }
 }
