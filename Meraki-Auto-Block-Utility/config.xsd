@@ -10,6 +10,7 @@
         <xs:element name="MerakiAPIKey" type="xs:string" minOccurs="0" />
         <xs:element name="Organization" type="xs:string" minOccurs="0" />
         <xs:element name="NetworkId" type="xs:string" minOccurs="0" />
+        <xs:element name="SubnetsToIgnore" type="xs:string" minOccurs="0" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

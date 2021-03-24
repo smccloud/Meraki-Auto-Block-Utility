@@ -15,10 +15,18 @@ namespace Meraki_Auto_Block_Utility
         public string MerakiAPIKey { get; set; }
         public string Organization { get; set; }
         public string NetworkId { get; set; }
+        public string SubnetsToIgnore { get; set; }
 
         public Settings() { }
 
-        public Settings(bool remote, string remoteComputer, string remoteUserName, string remotePassword, string merakiAPIKey, string organization, string networkId)
+        public Settings(bool remote,
+            string remoteComputer,
+            string remoteUserName,
+            string remotePassword,
+            string merakiAPIKey,
+            string organization,
+            string networkId,
+            string subnetsToIgnore)
         {
             this.Remote = remote;
             this.RemoteComputer = remoteComputer;
@@ -27,6 +35,7 @@ namespace Meraki_Auto_Block_Utility
             this.MerakiAPIKey = merakiAPIKey;
             this.Organization = organization;
             this.NetworkId = networkId;
+            this.SubnetsToIgnore = subnetsToIgnore;
         }
     }
 }

@@ -7,4 +7,5 @@
   <MerakiAPIKey></MerakiAPIKey>
   <Organization></Organization>
   <NetworkId></NetworkId>
+  <SubnetsToIgnore></SubnetsToIgnore>
 </Settings>
