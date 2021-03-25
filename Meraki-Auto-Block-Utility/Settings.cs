@@ -16,6 +16,7 @@ namespace Meraki_Auto_Block_Utility
         public string Organization { get; set; }
         public string NetworkId { get; set; }
         public string SubnetsToIgnore { get; set; }
+        public string PythonPath { get; set; }
 
         public Settings() { }
 
@@ -26,7 +27,8 @@ namespace Meraki_Auto_Block_Utility
             string merakiAPIKey,
             string organization,
             string networkId,
-            string subnetsToIgnore)
+            string subnetsToIgnore,
+            string pythonPath)
         {
             this.Remote = remote;
             this.RemoteComputer = remoteComputer;
@@ -36,6 +38,7 @@ namespace Meraki_Auto_Block_Utility
             this.Organization = organization;
             this.NetworkId = networkId;
             this.SubnetsToIgnore = subnetsToIgnore;
+            this.PythonPath = pythonPath;
         }
     }
 }

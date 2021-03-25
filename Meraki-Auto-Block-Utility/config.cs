@@ -40,6 +40,8 @@ public partial class Settings {
     
     private string subnetsToIgnoreField;
     
+    private string pythonPathField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     public string Remote {
@@ -125,6 +127,17 @@ public partial class Settings {
         }
         set {
             this.subnetsToIgnoreField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public string PythonPath {
+        get {
+            return this.pythonPathField;
+        }
+        set {
+            this.pythonPathField = value;
         }
     }
 }

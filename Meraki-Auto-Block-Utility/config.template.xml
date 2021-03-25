@@ -8,4 +8,5 @@
   <Organization></Organization>
   <NetworkId></NetworkId>
   <SubnetsToIgnore></SubnetsToIgnore>
+  <PythonPath></PythonPath>
 </Settings>

@@ -15,6 +15,8 @@ namespace Meraki_Auto_Block_Utility
     {
         static Root L7FirewallRules;
         static List<string> Subnets;
+        static string json;
+        static Settings settings;
         static void Main(string[] args)
         {
             MainAsync().GetAwaiter().GetResult();
@@ -31,7 +33,7 @@ namespace Meraki_Auto_Block_Utility
             {
                 L7FirewallRules = new Root();
                 Subnets = new List<string>();
-                Settings settings = new Settings();
+                settings = new Settings();
                 XmlSerializer mySerializer = new XmlSerializer(typeof(Settings));
                 using (StreamReader streamReader = new StreamReader(configFile))
                 {
@@ -70,23 +72,26 @@ namespace Meraki_Auto_Block_Utility
                         {
                             Console.WriteLine("Checking entry " + count.ToString() + " of " + amount.ToString());
                             count++;
-                            if (entry.Source == "MSExchangeFrontEndTransport" && entry.InstanceId == 2147746827 && entry != null)
+                            if (entry != null)
                             {
-                                string[] temp = entry.Message.Split('[');
-                                string[] temp2 = temp[1].Split(']');
-                                bool add = false;
-                                IPAddress iPAddress = IPAddress.Parse(temp2[0]);
-                                foreach(var subnet in Subnets)
+                                if (entry.Source == "MSExchangeFrontEndTransport" && entry.InstanceId == 2147746827)
                                 {
-                                    if(SubnetCheck.IsInSubnet(iPAddress,subnet))
+                                    string[] temp = entry.Message.Split('[');
+                                    string[] temp2 = temp[1].Split(']');
+                                    bool add = false;
+                                    IPAddress iPAddress = IPAddress.Parse(temp2[0]);
+                                    foreach (var subnet in Subnets)
                                     {
-                                        add = true;
-                                        break;
+                                        if (SubnetCheck.IsInSubnet(iPAddress, subnet))
+                                        {
+                                            add = true;
+                                            break;
+                                        }
                                     }
-                                }
-                                if (!ips.Contains(temp2[0]) && add)
-                                {
-                                    ips.Add(temp2[0]);
+                                    if (!ips.Contains(temp2[0]) && !add)
+                                    {
+                                        ips.Add(temp2[0]);
+                                    }
                                 }
                             }
                         }
@@ -111,29 +116,38 @@ namespace Meraki_Auto_Block_Utility
                         temp2.Policy = Layer7FirewallRulePolicy.Deny;
                         temp2.Type = Layer7FirewallRuleType.IpRange;
                         temp2.Value = ip;
+                        rules.Add(temp2);
                     }
                 }
 
-                await SetL7FirewallRules(settings.MerakiAPIKey, settings.Organization, settings.NetworkId, rules);
+                json = JsonConvert.SerializeObject(L7FirewallRules.rules);
+                json = json.Replace('"', '\'');
+                string workingFile = Directory.GetCurrentDirectory() + "\\update.py";
+                if (File.Exists(workingFile))
+                {
+                    File.Delete(workingFile);
+                }
+                using (StreamWriter sw = new StreamWriter(workingFile))
+                {
+                    sw.WriteLine("import meraki");
+                    sw.WriteLine("dashboard = meraki.DashboardAPI(\"" + settings.MerakiAPIKey + "\")");
+                    sw.WriteLine("response = dashboard.appliance.updateNetworkApplianceFirewallL7FirewallRules(\"" + settings.NetworkId + "\", rules=" + json + ")");
+                    sw.WriteLine("print(response)");
+                }
+                /*ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = settings.PythonPath;
+                start.Arguments = workingFile;
+                start.UseShellExecute = true;// Do not use OS shell
+                start.CreateNoWindow = false; // We don't need new window
+                start.LoadUserProfile = true;
+                Process.Start(start);
 
+                //Console.ReadLine();
+                if (File.Exists(workingFile))
+                {
+                    File.Delete(workingFile);
+                }*/
             }
-        }
-
-        static async Task SetL7FirewallRules(string apiKey, string organization, string networkId, List<Layer7FirewallRule> rules)
-        {
-            var merakiClient = new MerakiClient(new MerakiClientOptions
-            {
-                ApiKey = apiKey
-            });
-
-            Layer7FirewallRulesUpdateRequest layer7FirewallRulesUpdateRequest = new Layer7FirewallRulesUpdateRequest();
-            layer7FirewallRulesUpdateRequest.Rules.AddRange(rules);
-
-            var l7FirewallRules = await merakiClient
-                 .MxLayer7FirewallRules
-                 .UpdateNetworkL7FirewallRules(networkId, layer7FirewallRulesUpdateRequest)
-                 .ConfigureAwait(false);
-             
         }
 
         static async Task GetL7FirewallRules(string apiKey, string organization = "", string networkId = "")
