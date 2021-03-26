@@ -19,6 +19,7 @@ namespace Meraki_Auto_Block_Utility
         static Settings settings;
         static void Main(string[] args)
         {
+            // As the Meraki API uses async, we do an async main method
             MainAsync().GetAwaiter().GetResult();
         }
 
@@ -27,6 +28,7 @@ namespace Meraki_Auto_Block_Utility
             string configFile = Directory.GetCurrentDirectory() + "\\config.xml";
             if (!File.Exists(configFile))
             {
+                //TODO: Add method to generate settings file here
                 Console.WriteLine("Config file not found, exiting!!!!");
             }
             else

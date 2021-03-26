@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
+  <!-- Will we be getting logs from a remote computer?  Please note, this is slower -->
   <Remote>FALSE</Remote>
+  <!-- The name of the remote computer -->
   <RemoteComputer></RemoteComputer>
-  <RemoteUserName></RemoteUserName>
-  <RemotePassword></RemotePassword>
+  <!-- Your Meraki API key, suggestion is to use one just for this app -->
   <MerakiAPIKey></MerakiAPIKey>
+  <!-- Your organization in the Meraki Cloud -->
   <Organization></Organization>
+  <!-- The NetworkID your security appliance is in -->
   <NetworkId></NetworkId>
+  <!-- Comma delimited list of subnets we do not want to block (normally internal subnets) -->
   <SubnetsToIgnore></SubnetsToIgnore>
-  <PythonPath></PythonPath>
 </Settings>

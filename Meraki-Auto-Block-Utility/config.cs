@@ -28,10 +28,6 @@ public partial class Settings {
     
     private string remoteComputerField;
     
-    private string remoteUserNameField;
-    
-    private string remotePasswordField;
-    
     private string merakiAPIKeyField;
     
     private string organizationField;
@@ -39,8 +35,6 @@ public partial class Settings {
     private string networkIdField;
     
     private string subnetsToIgnoreField;
-    
-    private string pythonPathField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -61,28 +55,6 @@ public partial class Settings {
         }
         set {
             this.remoteComputerField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public string RemoteUserName {
-        get {
-            return this.remoteUserNameField;
-        }
-        set {
-            this.remoteUserNameField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public string RemotePassword {
-        get {
-            return this.remotePasswordField;
-        }
-        set {
-            this.remotePasswordField = value;
         }
     }
     
@@ -127,17 +99,6 @@ public partial class Settings {
         }
         set {
             this.subnetsToIgnoreField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public string PythonPath {
-        get {
-            return this.pythonPathField;
-        }
-        set {
-            this.pythonPathField = value;
         }
     }
 }
