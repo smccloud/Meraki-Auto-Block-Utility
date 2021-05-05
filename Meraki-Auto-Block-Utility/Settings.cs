@@ -33,6 +33,14 @@ namespace Meraki_Auto_Block_Utility
         /// Comma delimited list of subnets we do not want to block (normally internal subnets)
         /// </summary>
         public string SubnetsToIgnore { get; set; }
+        /// <summary>
+        /// The max amount of rules to allow before clearing out the list
+        /// </summary>
+        public string MaxRules { get; set; }
+        /// <summary>
+        /// Keep rules blocking countries no matter what
+        /// </summary>
+        public string KeepCountryRules { get; set; }
 
         public Settings() { }
 
@@ -41,7 +49,9 @@ namespace Meraki_Auto_Block_Utility
             string merakiAPIKey,
             string organization,
             string networkId,
-            string subnetsToIgnore)
+            string subnetsToIgnore,
+            string maxRules,
+            string keepCountryRules)
         {
             this.Remote = remote;
             this.RemoteComputer = remoteComputer;;
@@ -49,6 +59,8 @@ namespace Meraki_Auto_Block_Utility
             this.Organization = organization;
             this.NetworkId = networkId;
             this.SubnetsToIgnore = subnetsToIgnore;
+            this.MaxRules = maxRules;
+            this.KeepCountryRules = keepCountryRules;
         }
     }
 }

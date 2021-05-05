@@ -36,6 +36,8 @@ public partial class Settings {
     
     private string subnetsToIgnoreField;
     
+    private string maxRulesField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     public string Remote {
@@ -99,6 +101,17 @@ public partial class Settings {
         }
         set {
             this.subnetsToIgnoreField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public string MaxRules {
+        get {
+            return this.maxRulesField;
+        }
+        set {
+            this.maxRulesField = value;
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿@echo off
-ren Call the utility to generate the Python file
+rem Call the utility to generate the Python file
 Meraki-Auto-Block-Utility.exe
-ren Execute the Python file
+rem Execute the Python file
 python update.py
-ren Delete the Python file
+rem Delete the Python file
 del /q update.py
+del /q meraki_api__log__*

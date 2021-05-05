@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Meraki.Api.Data;
 using System.Net;
+using System.Text;
 
 namespace Meraki_Auto_Block_Utility
 {
@@ -120,6 +121,11 @@ namespace Meraki_Auto_Block_Utility
                         temp2.Value = ip;
                         rules.Add(temp2);
                     }
+                }
+                
+                if (rules.Count > int.Parse(settings.MaxRules))
+                {
+                        rules = new List<Layer7FirewallRule>();
                 }
 
                 json = JsonConvert.SerializeObject(L7FirewallRules.rules);

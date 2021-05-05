@@ -12,4 +12,8 @@
   <NetworkId></NetworkId>
   <!-- Comma delimited list of subnets we do not want to block (normally internal subnets) -->
   <SubnetsToIgnore></SubnetsToIgnore>
+  <!-- Max number of rules to allow before starting over -->
+  <MaxRules></MaxRules>
+  <!-- Keep rules blocking countries no matter what, not yet implemented -->
+  <KeepCountryRules></KeepCountryRules>
 </Settings>
